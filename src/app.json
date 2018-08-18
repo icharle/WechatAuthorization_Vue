@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/scan/main",
     "pages/index/main"
   ],
   "window": {
