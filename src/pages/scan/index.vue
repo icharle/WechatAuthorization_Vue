@@ -1,7 +1,19 @@
 <template>
-  <div>
-    <button type="primary">登录</button>
-    <button type="warn">取消</button>
+  <div class="scan">
+    <div class="header">
+      <div>
+        <img class="logo" src="https://p.qpic.cn/qqconnect_app_logo/NZwLatZ1GTF9cu0uCYpYNuK3vIR3QgepIYzWaY4diciaU/0?876.8045970597293">
+        <p class="logo_name">艾超科技</p>
+      </div>
+    </div>
+    <div class="message">
+      <div class="title">网页由该小程序开发，请确认授权以下信息</div>
+      <div class="prompt">· 获得你的公开信息（昵称、头像等）</div>
+    </div>
+    <div class="btn">
+      <button class="accept" @click="">确认登录</button>
+      <button class="reject" @click="">拒绝</button>
+    </div>
   </div>
 </template>
 
@@ -19,5 +31,41 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
+  .scan
+    .header
+      display flex
+      flex-direction row
+      justify-content center
+      align-items center
+      margin 0 auto
+      width 80%
+      height 200px
+      border-bottom 2px solid #f4f4f4
+      .logo
+        width 100px
+        height 100px
+        border-radius 5px
+      .logo_name
+        text-align center
+        padding-top 5px
+        font-size 22px
+    .message
+      width 80%
+      margin 30px auto
+      .title
+        font-size 18px
+      .prompt
+        margin-top 8px
+        font-size 15px
+        color #8e8e8e
+    .btn
+      width 80%
+      margin 0 auto
+      .accept
+        color white
+        background-color #179B16
+      .reject
+        margin-top 20px
+        color white
+        background-color #E64340
 </style>
