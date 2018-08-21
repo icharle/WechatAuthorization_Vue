@@ -15,11 +15,12 @@ export default {
     } else {
       redirecturl = path.path
     }
-
     // 强制跳转至授权页面
-    wx.reLaunch({
-      url: '/pages/login/main?redirect_url=' + encodeURIComponent(`/${redirecturl}`)
-    })
+    if (!wx.getStorageSync('token')) {
+      wx.reLaunch({
+        url: '/pages/login/main?redirect_url=' + encodeURIComponent(`/${redirecturl}`)
+      })
+    }
   }
 }
 </script>

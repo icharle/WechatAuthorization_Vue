@@ -3,7 +3,7 @@ import Fly from 'flyio'
 const request = new Fly()
 
 // 设置请求基地址
-request.config.baseURL = 'http://authorization.test/'
+request.config.baseURL = 'http://authorization.test/api/'
 
 // 添加请求拦截器
 request.interceptors.request.use((request) => {
@@ -25,3 +25,4 @@ request.interceptors.response.use(
     return Promise.resolve()
   }
 )
+export default request
