@@ -19,6 +19,12 @@ export default {
       })
     })
   },
+  /**
+   * 微信用户详细信息
+   * @param iv
+   * @param encryptedData
+   * @returns {Promise<any>}
+   */
   getUserInfo (iv, encryptedData) {
     return new Promise((resolve, reject) => {
       // 判断是否授权

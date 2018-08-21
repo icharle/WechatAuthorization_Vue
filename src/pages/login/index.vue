@@ -22,11 +22,13 @@
       return {
       }
     },
+    onLoad () {
+      let options = this.$root.$mp.query
+      console.log(decodeURIComponent(options.redirect_url))
+    },
     methods: {
       GetUserInfo (e) {
         let data = e.mp.detail
-        data.iv
-        data.encryptedData
         console.log(data)
       }
     }
@@ -59,7 +61,7 @@
         font-size 18px
       .prompt
         margin-top 8px
-        font-size 15px
+        font-size 12px
         color #8e8e8e
     .btn
       width 80%

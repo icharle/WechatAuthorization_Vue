@@ -61,14 +61,14 @@
         font-size 18px
       .prompt
         margin-top 8px
-        font-size 15px
+        font-size 12px
         color #8e8e8e
     .btn
       width 80%
       margin 0 auto
       .accept
         color white
-        background-color #179B16
+        background-color #04be02
       .reject
         margin-top 20px
         color white
