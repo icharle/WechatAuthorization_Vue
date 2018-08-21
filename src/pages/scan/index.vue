@@ -3,15 +3,15 @@
     <div class="header">
       <div>
         <img class="logo" src="https://p.qpic.cn/qqconnect_app_logo/NZwLatZ1GTF9cu0uCYpYNuK3vIR3QgepIYzWaY4diciaU/0?876.8045970597293">
-        <p class="logo_name">艾超科技</p>
+        <p class="logo_name">速腾科技</p>
       </div>
     </div>
     <div class="message">
-      <div class="title">网页由该小程序开发，请确认授权以下信息</div>
-      <div class="prompt">· 获得你的公开信息（昵称、头像等）</div>
+      <div class="title">该程序将获得以下信息</div>
+      <div class="prompt">· 获得您的公开信息（昵称、头像等）</div>
     </div>
     <div class="btn">
-      <button class="accept" @click="">确认登录</button>
+      <button class="accept" @click="accept">确认登录</button>
       <button class="reject" @click="">拒绝</button>
     </div>
   </div>
@@ -24,8 +24,13 @@
       }
     },
     onLoad () {
-      let options = this.$root.$mp.query
-      console.log(options.scene)
+      // let options = this.$root.$mp.query
+      // console.log(options.scene)
+    },
+    methods: {
+      accept () {
+        console.log(1)
+      }
     }
   }
 </script>

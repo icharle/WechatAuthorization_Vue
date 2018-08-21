@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/scan/main"
+    "pages/scan/main",
+    "pages/login/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

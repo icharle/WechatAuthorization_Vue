@@ -1,6 +1,25 @@
-<script>
+<script type="text/ecmascript-6">
 export default {
-  created () {
+  onLaunch (path) {
+    let query = '' // 链接参数
+    let redirecturl = '' // 跳转原本页面
+
+    // 判断URL中是否带有参数 若有则拼接成字符串
+    for (let i in path.query) {
+      if (i) {
+        query = query + i + '=' + path.query[i] + '&'
+      }
+    }
+    if (query) {
+      redirecturl = path.path + '?' + query
+    } else {
+      redirecturl = path.path
+    }
+
+    // 强制跳转至授权页面
+    wx.reLaunch({
+      url: '/pages/login/main?redirect_url=' + encodeURIComponent(`/${redirecturl}`)
+    })
   }
 }
 </script>
