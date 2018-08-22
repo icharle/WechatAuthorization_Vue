@@ -17,19 +17,22 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import util from '@/utils/utils'
   export default {
     data () {
       return {
+        redirect_url: ''
       }
     },
     onLoad () {
       let options = this.$root.$mp.query
-      console.log(decodeURIComponent(options.redirect_url))
+      this.redirect_url = decodeURIComponent(options.redirect_url) // 保存原页面 授权完成后跳转
     },
     methods: {
-      GetUserInfo (e) {
+      async GetUserInfo (e) {
         let data = e.mp.detail
-        console.log(data)
+        await util.getUserInfo(data.iv, data.encryptedData) // 登录完成跳转
+        wx.reLaunch({ url: this.redirect_url })
       }
     }
   }
