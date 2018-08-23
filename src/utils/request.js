@@ -16,6 +16,10 @@ request.interceptors.request.use((request) => {
 // 添加响应拦截器，响应拦截器会在then/catch处理之前执行
 request.interceptors.response.use(
   (response) => {
+    // 无痛刷新生成token值保存
+    if (response.headers.authorization) {
+      wx.setStorageSync('token', response.headers.authorization)
+    }
     // 只将请求结果的data字段返回
     return Promise.resolve(response.data)
   },
