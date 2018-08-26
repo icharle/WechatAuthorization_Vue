@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/scan/main",
+    "pages/other/main",
     "pages/login/main"
   ],
   "window": {

@@ -18,18 +18,21 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import api from '@/utils/api'
   export default {
     data () {
       return {
+        scene: ''
       }
     },
     onLoad () {
-      // let options = this.$root.$mp.query
+      let options = this.$root.$mp.query
+      this.scene = options.scene
       // console.log(options.scene)
     },
     methods: {
-      accept () {
-        console.log(1)
+      async accept () {
+        await api.WxPutAuth({scene: this.scene})
       }
     }
   }

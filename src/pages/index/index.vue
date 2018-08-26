@@ -24,7 +24,7 @@ export default {
   methods: {
     ajax () {
       wx.request({
-        url: 'http://authorization.test/api/CheckAuth',
+        url: 'http://authorization.test/api/WxPutAuth',
         method: 'post',
         header: {
           'X-Requested-With': 'XMLHttpRequest'
