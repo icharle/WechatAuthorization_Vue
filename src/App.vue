@@ -19,7 +19,7 @@ export default {
     // 强制跳转至授权页面
     if (!wx.getStorageSync('token')) {
       wx.reLaunch({
-        url: '/pages/login/main?redirect_url=' + encodeURIComponent(`/${redirecturl}`)
+        url: '/pages/auth/main?redirect_url=' + encodeURIComponent(`/${redirecturl}`)
       })
     }
   }
