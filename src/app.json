@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/add/main",
+    "pages/index/main",
     "pages/auth/main",
     "pages/user/main",
-    "pages/index/main",
     "pages/other/main"
   ],
   "window": {

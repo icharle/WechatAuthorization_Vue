@@ -5,7 +5,7 @@
       <p class="authtext">需要您的授权才能使用哦！</p>
     </div>
     <div class="btn">
-      <button class="accept" open-type="getUserInfo" @getuserinfo="GetUserInfo">确认授权</button>
+      <button class="accept" open-type="getUserInfo" @getuserinfo="GetUserInfo" plain="true">确认授权</button>
     </div>
   </div>
 </template>
@@ -51,6 +51,6 @@
       width 85%
       margin 5% auto
       .accept
-        color white
-        background-color #338FFC
+        color #338FFC
+        border 1px solid #338FFC
 </style>
