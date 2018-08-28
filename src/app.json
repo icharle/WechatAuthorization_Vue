@@ -1,15 +1,34 @@
 {
   "pages": [
-    "pages/add/main",
     "pages/index/main",
-    "pages/auth/main",
     "pages/user/main",
+    "pages/add/main",
+    "pages/auth/main",
     "pages/other/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#338FFC",
     "navigationBarTitleText": "Wechat Authenticator",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#338FFC",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/main",
+        "iconPath": "/static/image/icon/auth.png",
+        "selectedIconPath": "/static/image/icon/authselect.png",
+        "text": "授权"
+      },
+      {
+        "pagePath": "pages/user/main",
+        "iconPath": "/static/image/icon/user.png",
+        "selectedIconPath": "/static/image/icon/userselect.png",
+        "text": "用户"
+      }
+    ]
   }
 }
