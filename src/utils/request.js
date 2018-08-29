@@ -2,8 +2,10 @@ import Fly from 'flyio/dist/npm/wx'
 
 const request = new Fly()
 
+const APP_API = 'http://authorization.test/api/' // api
+
 // 设置请求基地址
-request.config.baseURL = 'http://authorization.test/api/'
+request.config.baseURL = `${APP_API}`
 
 // 添加请求拦截器
 request.interceptors.request.use((request) => {
@@ -29,4 +31,21 @@ request.interceptors.response.use(
     return Promise.resolve()
   }
 )
-export default request
+
+// 封装图片上传
+const upLoad = (fileurl, filePath, formData) => {
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      url: `${APP_API}` + fileurl,
+      header: {
+        'Authorization': wx.getStorageSync('token')
+      },
+      filePath: filePath, //  本地路径名
+      name: 'logo',
+      formData: formData,
+      success: res => resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+export {request, upLoad}
