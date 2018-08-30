@@ -29,6 +29,10 @@ request.interceptors.response.use(
   (err) => {
     // 发生网络错误后会走到这里
     console.log(err)
+    // 无痛刷新生成token值保存(防止非401错误时刚好刷新token)
+    if (err.response.headers.authorization) {
+      store.dispatch('refreshToken', err.response.headers.authorization)
+    }
     return Promise.resolve()
   }
 )

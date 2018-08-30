@@ -7,7 +7,9 @@ const api = {
   // 小程序端授予权限
   WxPutAuth: (paramObj) => request.post('WxPutAuth', paramObj),
 
-  WxUpload: (file, paramObj) => upLoad('UploadFile', file, paramObj)
+  WxUpload: (file, paramObj) => upLoad('UploadFile', file, paramObj),
+
+  SaveSite: (paramObj) => request.post('SaveSite', paramObj)
 }
 
 export default api

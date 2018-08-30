@@ -2,8 +2,8 @@
   <div class="add">
     <img :src="imgsrc" class="logo" @click="chooseImg">
     <div class="input">
-      <input type="text" class="title" placeholder="站点名称"/>
-      <input type="text" class="desc" placeholder="站点描述"/>
+      <input type="text" class="title" placeholder="站点名称" v-model="sitename"/>
+      <input type="text" class="desc" placeholder="站点描述" v-model="sitedesc"/>
       <button class="submit" plain="true" @click="upload">提交</button>
     </div>
   </div>
@@ -11,10 +11,13 @@
 
 <script type="text/ecmascript-6">
   import api from '@/utils/api'
+
   export default {
     data () {
       return {
-        imgsrc: '/static/image/add.png'
+        imgsrc: '/static/image/add.png',
+        sitename: '',
+        sitedesc: ''
       }
     },
     methods: {
@@ -28,11 +31,9 @@
           }
         })
       },
-      upload () {
-        api.WxUpload(this.imgsrc, {})
-          .then(
-            result => console.log(result)
-          )
+      async upload () {
+        let sitelogo = await api.WxUpload(this.imgsrc, {})
+        await api.SaveSite({'sitename': this.sitename, 'sitedesc': this.sitedesc, 'sitelogo': sitelogo})
       }
     }
   }
