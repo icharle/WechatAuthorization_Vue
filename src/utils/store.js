@@ -7,8 +7,20 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    token: wx.getStorageSync('token')
   },
   mutations: {
+    refreshToken (state, token) {
+      state.token = token
+      wx.setStorageSync('token', token)
+    }
+  },
+  actions: {
+    refreshToken ({commit}, token) {
+      return new Promise(function (resolve, reject) {
+        commit('refreshToken', token)
+      })
+    }
   }
 })
 

@@ -1,4 +1,5 @@
 import api from '@/utils/api'
+import store from './store'
 /**
    * 微信登录
    * @returns {Promise<any>}
@@ -38,7 +39,7 @@ function getUserInfo (iv, encryptedData) {
                 iv: iv,
                 encryptedData: encryptedData
               }).then(res => {
-                wx.setStorageSync('token', res.token)
+                store.dispatch('refreshToken', res.token)
                 resolve(res.token)
               }).catch(error => {
                 reject(error)
