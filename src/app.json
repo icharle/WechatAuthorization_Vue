@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/add/main",
     "pages/index/main",
     "pages/user/main",
+    "pages/add/main",
     "pages/auth/main",
     "pages/other/main"
   ],
@@ -18,7 +18,7 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/add/main",
+        "pagePath": "pages/index/main",
         "iconPath": "/static/image/icon/auth.png",
         "selectedIconPath": "/static/image/icon/authselect.png",
         "text": "授权"

@@ -52,13 +52,13 @@
         height 40px
         line-height 40px
         padding 0 5px
-        border-bottom: 1 rpx solid #b2b2b2;
+        border-bottom: 1rpx solid #b2b2b2;
         margin-top 20px
       .desc
         height 40px
         line-height 40px
         padding 0 5px
-        border-bottom: 1 rpx solid #b2b2b2;
+        border-bottom: 1rpx solid #b2b2b2;
         margin-top 20px
     .submit
       margin-top 60px
