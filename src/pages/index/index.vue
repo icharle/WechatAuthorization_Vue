@@ -2,7 +2,7 @@
   <div class="content">
     <ul v-for="(item,index) in info" :key="index">
       <li class="info" @touchstart="touchStart" @touchend="touchEnd($event,index)" :data-type="item.type">
-        <img class="sitelogo" :src="item.sitelogo">
+        <img class="sitelogo" :src="img_url + item.sitelogo">
         <div class="infotext">
           <p class="sitename">{{item.sitename}}</p>
           <p class="sitedesc">{{item.sitedesc}}</p>
@@ -17,57 +17,41 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import api from '@/utils/api'
+  import {IMG_API} from '@/utils/request'
 
-export default {
-  data () {
-    return {
-      startX: 0, // 触摸位置
-      endX: 0, // 结束位置
-      info: [
-        {
-          sitelogo: 'https://wx.qlogo.cn/mmopen/vi_32/QtOO2flJAnibpc2lGnGuiaicyKHibIaqUya2ohrArJKicLpgPuPK2Mez8jbqibnKibL1O7hTyYicHoDD6bywpkwHxMCBNQ/132',
-          sitename: '艾超科技',
-          sitedesc: '记录点滴，记录生活',
-          type: 0
-        },
-        {
-          sitelogo: 'https://wx.qlogo.cn/mmopen/vi_32/QtOO2flJAnibpc2lGnGuiaicyKHibIaqUya2ohrArJKicLpgPuPK2Mez8jbqibnKibL1O7hTyYicHoDD6bywpkwHxMCBNQ/132',
-          sitename: '艾超博客',
-          sitedesc: '记录点滴，记录生活',
-          type: 0
-        },
-        {
-          sitelogo: 'https://wx.qlogo.cn/mmopen/vi_32/QtOO2flJAnibpc2lGnGuiaicyKHibIaqUya2ohrArJKicLpgPuPK2Mez8jbqibnKibL1O7hTyYicHoDD6bywpkwHxMCBNQ/132',
-          sitename: '艾超',
-          sitedesc: '记录点滴，记录生活',
-          type: 0
-        }
-      ]
-    }
-  },
-
-  methods: {
-    touchStart (e) {
-      this.startX = e.mp.changedTouches[0].clientX
-    },
-    touchEnd (e, index) {
-      this.endX = e.mp.changedTouches[0].clientX
-      if (this.startX - this.endX > 20) {
-        // 左滑
-        this.info[index].type = 1
-      } else if (this.endX - this.startX > 20) {
-        // 右滑
-        this.info[index].type = 0
+  export default {
+    data () {
+      return {
+        startX: 0, // 触摸位置
+        endX: 0, // 结束位置
+        info: [], // 站点信息
+        img_url: IMG_API // 图片接口前缀
       }
     },
-    del (index) {
-      this.info.splice(index, 1)
+    async onShow () {
+      let info = await api.GetSite()
+      this.info = info.data
+    },
+    methods: {
+      touchStart (e) {
+        this.startX = e.mp.changedTouches[0].clientX
+      },
+      touchEnd (e, index) {
+        this.endX = e.mp.changedTouches[0].clientX
+        if (this.startX - this.endX > 20) {
+          // 左滑
+          this.info[index].type = 1
+        } else if (this.endX - this.startX > 20) {
+          // 右滑
+          this.info[index].type = 0
+        }
+      },
+      del (index) {
+        this.info.splice(index, 1)
+      }
     }
-  },
-
-  created () {
   }
-}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
