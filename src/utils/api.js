@@ -11,10 +11,19 @@ const api = {
   WxUpload: (file, paramObj) => upLoad('UploadFile', file, paramObj),
 
   // 保存站点
-  SaveSite: (paramObj) => request.post('SaveSite', paramObj),
+  SaveSite: (paramObj) => request.post('sites', paramObj),
 
   // 获取用户所有站点
-  GetSite: () => request.get('GetSite')
+  GetSite: () => request.get('sites'),
+
+  // 删除某个站点
+  DelSite: (id) => request.delete(`sites/${id}`),
+
+  // 更新某个站点
+  UpdateSite: (id) => request.put(`sites/${id}`),
+
+  // 编辑某个站点
+  EditSite: (id) => request.get(`sites/${id}/edit`)
 }
 
 export default api

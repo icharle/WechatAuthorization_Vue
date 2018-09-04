@@ -8,11 +8,12 @@
           <p class="sitedesc">{{item.sitedesc}}</p>
         </div>
         <div class="option">
-          <div class="edit">编辑</div>
+          <div class="edit" @click="edit">编辑</div>
           <div class="del" @click="del(index)">删除</div>
         </div>
       </li>
     </ul>
+    <a href="/pages/add/main" >添加站点</a>
   </div>
 </template>
 
@@ -47,8 +48,14 @@
           this.info[index].type = 0
         }
       },
-      del (index) {
+      async del (index) {
+        await api.DelSite(this.info[index].id)
         this.info.splice(index, 1)
+      },
+      edit () {
+        wx.navigateTo({
+          url: '/pages/add/main'
+        })
       }
     }
   }
