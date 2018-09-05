@@ -20,7 +20,7 @@ const api = {
   DelSite: (id) => request.delete(`sites/${id}`),
 
   // 更新某个站点
-  UpdateSite: (id) => request.put(`sites/${id}`),
+  UpdateSite: (id, paramObj) => request.put(`sites/${id}`, paramObj),
 
   // 编辑某个站点
   EditSite: (id) => request.get(`sites/${id}/edit`)

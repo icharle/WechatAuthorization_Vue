@@ -8,7 +8,7 @@
           <p class="sitedesc">{{item.sitedesc}}</p>
         </div>
         <div class="option">
-          <div class="edit" @click="edit">编辑</div>
+          <div class="edit" @click="edit(index)">编辑</div>
           <div class="del" @click="del(index)">删除</div>
         </div>
       </li>
@@ -52,9 +52,9 @@
         await api.DelSite(this.info[index].id)
         this.info.splice(index, 1)
       },
-      edit () {
+      edit (index) {
         wx.navigateTo({
-          url: '/pages/add/main'
+          url: '/pages/add/main?id=' + this.info[index].id
         })
       }
     }

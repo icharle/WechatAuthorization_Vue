@@ -1,10 +1,10 @@
 <template>
   <div class="add">
-    <img :src="imgsrc" class="logo" @click="chooseImg">
+    <img :src="siteinfo.sitelogo" class="logo" @click="chooseImg">
     <div class="input">
-      <input type="text" class="title" placeholder="站点名称" v-model="sitename"/>
-      <input type="text" class="desc" placeholder="站点描述" v-model="sitedesc"/>
-      <button class="submit" plain="true" @click="upload">提交</button>
+      <input type="text" class="title" placeholder="站点名称" v-model="siteinfo.sitename"/>
+      <input type="text" class="desc" placeholder="站点描述" v-model="siteinfo.sitedesc"/>
+      <button class="submit" plain="true" @click="upload(siteinfo.type)">{{siteinfo.type == 'add' ? '提交' : '更新'}}</button>
     </div>
   </div>
 </template>
@@ -14,11 +14,11 @@
   export default {
     data () {
       return {
-        imgsrc: '/static/image/add.png',
-        sitename: '',
-        sitedesc: ''
+        siteinfo: {},
+        imgsrc: ''
       }
     },
+    props: ['siteinfo'],
     methods: {
       chooseImg () {
         wx.chooseImage({
@@ -30,9 +30,13 @@
           }
         })
       },
-      async upload () {
-        let sitelogo = await api.WxUpload(this.imgsrc, {})
-        await api.SaveSite({'sitename': this.sitename, 'sitedesc': this.sitedesc, 'sitelogo': sitelogo})
+      async upload (data) {
+        if (data === 'add') {
+          let sitelogo = await api.WxUpload(this.imgsrc, {})
+          await api.SaveSite({'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': sitelogo})
+        } else {
+          await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': this.siteinfo.sitelogo})
+        }
       }
     }
   }

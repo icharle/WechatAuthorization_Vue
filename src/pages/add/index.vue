@@ -1,15 +1,35 @@
 <template>
   <div class="add">
-    <site></site>
+    <site :siteinfo="siteinfo"></site>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import api from '@/utils/api'
   import site from '@/components/site'
+  import {IMG_API} from '@/utils/request'
 
   export default {
     data () {
       return {
+        siteinfo: {},
+        default: {
+          sitelogo: '/static/image/add.png',
+          sitename: '',
+          sitedesc: '',
+          type: 'add'
+        }
+      }
+    },
+    async onLoad () {
+      let options = this.$root.$mp.query
+      if (options.id) {
+        let info = await api.EditSite(options.id)
+        this.siteinfo = info.data
+        this.siteinfo.sitelogo = IMG_API + info.data.sitelogo
+        this.siteinfo.type = 'update'
+      } else {
+        this.siteinfo = this.default
       }
     },
     methods: {
