@@ -11,6 +11,7 @@
 
 <script type="text/ecmascript-6">
   import api from '@/utils/api'
+  import {IMG_API} from '@/utils/request'
   export default {
     data () {
       return {
@@ -27,16 +28,23 @@
           sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
           success: res => {
             this.imgsrc = res.tempFilePaths[0]
+            this.siteinfo.sitelogo = res.tempFilePaths[0]
           }
         })
       },
       async upload (data) {
         if (data === 'add') {
           let sitelogo = await api.WxUpload(this.imgsrc, {})
+          this.imgsrc = '' // 置空 防止更新数据出现问题
           await api.SaveSite({'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': sitelogo})
+        } else if (data === 'update' && this.imgsrc !== '') {
+          let sitelogo = await api.WxUpload(this.imgsrc, {})
+          this.imgsrc = '' // 置空 防止更新数据出现问题
+          await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': sitelogo})
         } else {
-          await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': this.siteinfo.sitelogo})
+          await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': (this.siteinfo.sitelogo).substr((IMG_API.length - 1), (this.siteinfo.sitelogo).length - 1)}) // 去掉前缀
         }
+        wx.navigateBack({ delta: 1 }) // 返回主页
       }
     }
   }
