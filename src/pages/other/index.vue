@@ -2,8 +2,8 @@
   <div class="scan">
     <div class="header">
       <div>
-        <img class="logo" src="https://p.qpic.cn/qqconnect_app_logo/NZwLatZ1GTF9cu0uCYpYNuK3vIR3QgepIYzWaY4diciaU/0?876.8045970597293">
-        <p class="logo_name">速腾科技</p>
+        <img class="logo" :src="siteinfo.sitelogo">
+        <p class="logo_name">{{siteinfo.sitename}}</p>
       </div>
     </div>
     <div class="message">
@@ -12,27 +12,32 @@
     </div>
     <div class="btn">
       <button class="accept" @click="accept">确认登录</button>
-      <button class="reject" @click="">拒绝</button>
+      <!--<button class="reject" @click="">拒绝</button>-->
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import api from '@/utils/api'
+  import {IMG_API} from '@/utils/request'
   export default {
     data () {
       return {
-        scene: ''
+        scene: '',
+        siteinfo: ''
       }
     },
-    onLoad () {
+    async onLoad () {
       let options = this.$root.$mp.query
       this.scene = options.scene
-      // console.log(options.scene)
+      let siteinfo = await api.GetSiteInfo({scene: options.scene})
+      this.siteinfo = siteinfo.data
+      this.siteinfo.sitelogo = IMG_API + siteinfo.data.sitelogo
     },
     methods: {
       async accept () {
         await api.WxPutAuth({scene: this.scene})
+        wx.reLaunch({ url: '/pages/index/main' })
       }
     }
   }

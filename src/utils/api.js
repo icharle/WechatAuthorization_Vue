@@ -4,6 +4,9 @@ const api = {
   // 微信授权登录
   AuthLogin: (paramObj) => request.post('AuthLogin', paramObj),
 
+  // 获取授权站点详细信息
+  GetSiteInfo: (paramObj) => request.post('GetSite', paramObj),
+
   // 小程序端授予权限
   WxPutAuth: (paramObj) => request.post('WxPutAuth', paramObj),
 

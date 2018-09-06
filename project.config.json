@@ -7,7 +7,7 @@
 		"minified": true,
 		"newFeature": true
 	},
-	"miniprogramRoot": "./dist/",
+	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
 	"appid": "wx2239fc3dba7608d0",
 	"projectname": "auth",
@@ -32,10 +32,10 @@
 			"current": 0,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "扫码",
-					"pathName": "pages/scan/main",
-					"query": "scene=123"
+					"pathName": "pages/other/main",
+					"query": "scene=5b911c0a0862d241667"
 				}
 			]
 		}

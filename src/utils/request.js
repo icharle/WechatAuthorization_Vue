@@ -5,7 +5,7 @@ const request = new Fly()
 
 const APP_API = 'http://authorization.test/api/' // api
 
-const IMG_API = 'http://authorization.test/' // 图片接口
+const IMG_API = 'http://authorization.test' // 图片接口
 
 // 设置请求基地址
 request.config.baseURL = `${APP_API}`

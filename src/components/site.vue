@@ -42,7 +42,7 @@
           this.imgsrc = '' // 置空 防止更新数据出现问题
           await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': sitelogo})
         } else {
-          await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': (this.siteinfo.sitelogo).substr((IMG_API.length - 1), (this.siteinfo.sitelogo).length - 1)}) // 去掉前缀
+          await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': (this.siteinfo.sitelogo).substr((IMG_API.length), (this.siteinfo.sitelogo).length - 1)}) // 去掉前缀
         }
         wx.navigateBack({ delta: 1 }) // 返回主页
       }
