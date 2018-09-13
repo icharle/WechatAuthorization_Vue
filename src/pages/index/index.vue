@@ -13,7 +13,9 @@
         </div>
       </li>
     </ul>
-    <a href="/pages/add/main" >添加站点</a>
+    <a class="addsite" id="movesite" href="/pages/add/main" hover-class="none" @touchstart="down" @touchmove="move"  @touchend="end" :style="style">
+      <span class="font">添加站点</span>
+    </a>
   </div>
 </template>
 
@@ -27,7 +29,12 @@
         startX: 0, // 触摸位置
         endX: 0, // 结束位置
         info: [], // 站点信息
-        img_url: IMG_API // 图片接口前缀
+        img_url: IMG_API, // 图片接口前缀
+        flags: false,
+        style: '',
+        position: {x: 0, y: 0},
+        dx: '',
+        dy: ''
       }
     },
     async onShow () {
@@ -47,6 +54,23 @@
           // 右滑
           this.info[index].type = 0
         }
+      },
+      down (e) {
+        this.flags = true
+        this.position.x = e.mp.changedTouches[0].clientX
+        this.position.y = e.mp.changedTouches[0].clientY
+        this.dx = e.mp.currentTarget.offsetLeft
+        this.dy = e.mp.currentTarget.offsetTop
+      },
+      move (e) {
+        if (this.flags) {
+          let xPum = this.dx + e.mp.changedTouches[0].clientX - this.position.x
+          let yPum = this.dy + e.mp.changedTouches[0].clientY - this.position.y
+          this.style = 'left: ' + xPum + 'px; top:' + yPum + 'px'
+        }
+      },
+      end () {
+        this.flags = false
       },
       async del (index) {
         await api.DelSite(this.info[index].id)
@@ -108,4 +132,20 @@
         .del
           flex 1
           background-color #ff4949
+    .addsite
+      position fixed
+      right 10px
+      bottom 20px
+      .font
+        display inline-block
+        box-sizing border-box
+        width 50px
+        height 50px
+        line-height 50px
+        border-radius 50%
+        text-align center
+        background-color #338FFC
+        z-index 2
+        font-size 12px
+        color #fff
 </style>
