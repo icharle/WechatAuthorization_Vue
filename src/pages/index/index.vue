@@ -2,11 +2,10 @@
   <div class="content">
     <ul v-for="(item,index) in info" :key="index">
       <li class="info" @touchstart="touchStart" @touchend="touchEnd($event,index)" :data-type="item.type">
-        <img class="sitelogo" :src="img_url + item.sitelogo">
+        <img class="sitelogo" :src="img_url + item.sitelogo" @click="showdetail(index)">
         <div class="infotext">
           <p class="sitename">{{item.sitename}}</p>
           <p class="sitedesc">{{item.sitedesc}}</p>
-          <p>{{item.site}}</p>
         </div>
         <div class="option">
           <div class="edit" @click="edit(index)">编辑</div>
@@ -85,6 +84,16 @@
       edit (index) {
         wx.navigateTo({
           url: '/pages/add/main?id=' + this.info[index].id
+        })
+      },
+      showdetail (index) {
+        wx.showModal({
+          title: '站点ID',
+          content: this.info[index].site,
+          showCancel: false,
+          confirmColor: '#338FFC',
+          success: res => { console.log(res) },
+          error: err => console.log(err)
         })
       }
     }

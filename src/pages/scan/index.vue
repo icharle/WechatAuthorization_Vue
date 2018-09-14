@@ -42,6 +42,7 @@
         util.showLoading('授权中...')
         await api.WxPutAuth({scene: this.scene})
         util.hideLoading()
+        util.toast('授权成功！')
         wx.reLaunch({ url: '/pages/index/main' })
       }
     }
