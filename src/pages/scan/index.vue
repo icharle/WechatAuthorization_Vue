@@ -19,6 +19,7 @@
 
 <script type="text/ecmascript-6">
   import api from '@/utils/api'
+  import util from '@/utils/utils'
   import {IMG_API} from '@/utils/request'
   export default {
     data () {
@@ -30,13 +31,17 @@
     async onLoad () {
       let options = this.$root.$mp.query
       this.scene = options.scene
+      util.showNavBarLoad()
       let siteinfo = await api.GetSiteInfo({scene: options.scene})
+      util.hideNavBarLoad()
       this.siteinfo = siteinfo.data
       this.siteinfo.sitelogo = IMG_API + siteinfo.data.sitelogo
     },
     methods: {
       async accept () {
+        util.showLoading('授权中...')
         await api.WxPutAuth({scene: this.scene})
+        util.hideLoading()
         wx.reLaunch({ url: '/pages/index/main' })
       }
     }

@@ -54,9 +54,53 @@ function getUserInfo (iv, encryptedData) {
   })
 }
 
+// 封装toast方法
+function toast (title = '提示', icon = 'success', duration = 1000, mask = true) {
+  return new Promise((resolve, reject) => {
+    wx.showToast({
+      title: title,
+      icon: icon,
+      duration: duration,
+      mask: mask,
+      success: res => resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+// 封装loading状态方法
+function showLoading (title = '加载中', mask = true) {
+  return new Promise((resolve, reject) => {
+    wx.showLoading({
+      title: title,
+      success: res => resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+
+// 封装隐藏loading状态方法
+function hideLoading () {
+  wx.hideLoading()
+}
+
+// 导航栏loading
+function showNavBarLoad () {
+  wx.showNavigationBarLoading()
+}
+
+// 导航栏loading隐藏
+function hideNavBarLoad () {
+  wx.hideNavigationBarLoading()
+}
+
 const util = {
   login,
-  getUserInfo
+  getUserInfo,
+  showLoading,
+  hideLoading,
+  showNavBarLoad,
+  hideNavBarLoad,
+  toast
 }
 
 export default util

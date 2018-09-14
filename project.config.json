@@ -9,7 +9,7 @@
 	},
 	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
-	"appid": "wx2239fc3dba7608d0",
+	"appid": "wxad1c393aa5bcd3bc",
 	"projectname": "auth",
 	"condition": {
 		"search": {

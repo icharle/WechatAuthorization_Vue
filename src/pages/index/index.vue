@@ -6,6 +6,7 @@
         <div class="infotext">
           <p class="sitename">{{item.sitename}}</p>
           <p class="sitedesc">{{item.sitedesc}}</p>
+          <p>{{item.site}}</p>
         </div>
         <div class="option">
           <div class="edit" @click="edit(index)">编辑</div>
@@ -21,6 +22,7 @@
 
 <script type="text/ecmascript-6">
   import api from '@/utils/api'
+  import util from '@/utils/utils'
   import {IMG_API} from '@/utils/request'
 
   export default {
@@ -38,7 +40,9 @@
       }
     },
     async onShow () {
+      util.showNavBarLoad()
       let info = await api.GetSite()
+      util.hideNavBarLoad()
       this.info = info.data
     },
     methods: {
@@ -73,7 +77,9 @@
         this.flags = false
       },
       async del (index) {
+        util.showNavBarLoad()
         await api.DelSite(this.info[index].id)
+        util.hideNavBarLoad()
         this.info.splice(index, 1)
       },
       edit (index) {
@@ -90,8 +96,10 @@
     width 100%
     height 100%
     li[data-type="0"]
+      transition: all .3s ease
       transform: translate3d(0,0,0)
     li[data-type="1"]
+      transition: all .3s ease
       transform: translate3d(-40%,0,0)
     .info
       display flex
@@ -106,7 +114,7 @@
         overflow hidden
         margin-left 3%
       .infotext
-        width 65%
+        width 80%
         height 75px
         margin-left 2%
         .sitename
@@ -134,8 +142,8 @@
           background-color #ff4949
     .addsite
       position fixed
-      right 10px
-      bottom 20px
+      right 30px
+      bottom 60px
       .font
         display inline-block
         box-sizing border-box

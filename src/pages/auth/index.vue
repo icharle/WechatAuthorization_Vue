@@ -25,7 +25,10 @@
     methods: {
       async GetUserInfo (e) {
         let data = e.mp.detail
+        util.showLoading('登录中...')
         await util.getUserInfo(data.iv, data.encryptedData) // 登录完成跳转
+        util.hideLoading()
+        util.toast('登录成功！')
         wx.reLaunch({ url: this.redirect_url })
       }
     }

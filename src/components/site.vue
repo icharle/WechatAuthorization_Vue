@@ -11,6 +11,7 @@
 
 <script type="text/ecmascript-6">
   import api from '@/utils/api'
+  import util from '@/utils/utils'
   import {IMG_API} from '@/utils/request'
   export default {
     data () {
@@ -33,6 +34,7 @@
         })
       },
       async upload (data) {
+        util.showLoading('添加中...')
         if (data === 'add') {
           let sitelogo = await api.WxUpload(this.imgsrc, {})
           this.imgsrc = '' // 置空 防止更新数据出现问题
@@ -44,6 +46,8 @@
         } else {
           await api.UpdateSite(this.siteinfo.id, {'sitename': this.siteinfo.sitename, 'sitedesc': this.siteinfo.sitedesc, 'sitelogo': (this.siteinfo.sitelogo).substr((IMG_API.length), (this.siteinfo.sitelogo).length - 1)}) // 去掉前缀
         }
+        util.hideLoading()
+        util.toast('添加成功！')
         wx.navigateBack({ delta: 1 }) // 返回主页
       }
     }
@@ -55,6 +59,7 @@
     .logo
       width 100px
       height 100px
+      margin 10% 0 0 10%
     .input
       width 80%
       font-size 16px

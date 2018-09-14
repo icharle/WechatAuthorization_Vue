@@ -4,7 +4,7 @@
     "pages/user/main",
     "pages/add/main",
     "pages/auth/main",
-    "pages/other/main"
+    "pages/scan/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
