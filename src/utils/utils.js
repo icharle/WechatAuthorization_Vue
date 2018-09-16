@@ -34,6 +34,7 @@ function getUserInfo (iv, encryptedData) {
         if (res.authSetting['scope.userInfo']) { // 已经授权才发送请求
           this.login()
             .then((res) => {
+              util.showLoading('登录中...')
               api.AuthLogin({
                 code: res,
                 iv: iv,
@@ -41,6 +42,8 @@ function getUserInfo (iv, encryptedData) {
               }).then(res => {
                 store.dispatch('refreshToken', res.token)
                 resolve(res.token)
+                util.hideLoading()
+                util.toast('登录成功！')
               }).catch(error => {
                 reject(error)
               })
