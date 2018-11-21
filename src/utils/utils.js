@@ -1,10 +1,11 @@
 import api from '@/utils/api'
 import store from './store'
+
 /**
-   * 微信登录
-   * @returns {Promise<any>}
-   * @constructor
-   */
+ * 微信登录
+ * @returns {Promise<any>}
+ * @constructor
+ */
 function login () {
   return new Promise(function (resolve, reject) {
     wx.login({
@@ -20,39 +21,49 @@ function login () {
   })
 }
 
-/**
-   * 微信用户详细信息
-   * @param iv
-   * @param encryptedData
-   * @returns {Promise<any>}
-   */
-function getUserInfo (iv, encryptedData) {
+// 调用微信获取用户详细信息 button权限
+function UserInfo () {
   return new Promise((resolve, reject) => {
-    // 判断是否授权
     wx.getSetting({
       success: (res) => {
-        if (res.authSetting['scope.userInfo']) { // 已经授权才发送请求
-          this.login()
-            .then((res) => {
-              util.showLoading('登录中...')
-              api.AuthLogin({
-                code: res,
-                iv: iv,
-                encryptedData: encryptedData
-              }).then(res => {
-                store.dispatch('refreshToken', res.token)
-                resolve(res.token)
-                util.hideLoading()
-                util.toast('登录成功！')
-              }).catch(error => {
-                reject(error)
-              })
-            })
-            .catch(error => {
-              reject(error)
-            })
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            withCredentials: true,
+            success: res => resolve(res),
+            fail: err => reject(err)
+          })
         }
       }
+    })
+  })
+}
+
+/**
+ * 微信用户详细信息
+ * @returns {Promise<any>}
+ */
+function getUserInfo () {
+  return new Promise((resolve, reject) => {
+    let code = null
+    return util.login().then(res => {
+      code = res
+      return util.UserInfo()
+    }).then(userInfo => {
+      util.showLoading('登录中...')
+      api.AuthLogin({
+        code: code,
+        iv: userInfo.iv,
+        encryptedData: userInfo.encryptedData
+      }).then(result => {
+        store.dispatch('refreshToken', result.token)
+        resolve(result.token)
+        util.hideLoading()
+        util.toast('登录成功！')
+      }).catch(error => {
+        reject(error)
+      })
+    }).catch(error => {
+      reject(error)
     })
   })
 }
@@ -70,6 +81,7 @@ function toast (title = '提示', icon = 'success', duration = 1000, mask = true
     })
   })
 }
+
 // 封装loading状态方法
 function showLoading (title = '加载中', mask = true) {
   return new Promise((resolve, reject) => {
@@ -98,6 +110,7 @@ function hideNavBarLoad () {
 
 const util = {
   login,
+  UserInfo,
   getUserInfo,
   showLoading,
   hideLoading,

@@ -1,7 +1,7 @@
 <template>
   <div class="auth">
     <div class="warn">
-      <img src="/static/image/nullauth.png" class="nullauth" >
+      <img src="/static/image/nullauth.png" class="nullauth">
       <p class="authtext">需要您的授权才能使用哦！</p>
     </div>
     <div class="btn">
@@ -12,6 +12,7 @@
 
 <script type="text/ecmascript-6">
   import util from '@/utils/utils'
+
   export default {
     data () {
       return {
@@ -23,9 +24,8 @@
       this.redirect_url = decodeURIComponent(options.redirect_url) // 保存原页面 授权完成后跳转
     },
     methods: {
-      async GetUserInfo (e) {
-        let data = e.mp.detail
-        await util.getUserInfo(data.iv, data.encryptedData) // 登录完成跳转
+      async GetUserInfo () {
+        await util.getUserInfo() // 登录完成跳转
         wx.reLaunch({ url: this.redirect_url })
       }
     }

@@ -13,7 +13,8 @@
         </div>
       </li>
     </ul>
-    <a class="addsite" id="movesite" href="/pages/add/main" hover-class="none" @touchstart="down" @touchmove="move"  @touchend="end" :style="style">
+    <a class="addsite" id="movesite" href="/pages/add/main" hover-class="none" @touchstart="down" @touchmove="move"
+       @touchend="end" :style="style">
       <span class="font">添加站点</span>
     </a>
   </div>
@@ -22,7 +23,7 @@
 <script type="text/ecmascript-6">
   import api from '@/utils/api'
   import util from '@/utils/utils'
-  import {IMG_API} from '@/utils/request'
+  import { IMG_API } from '@/utils/request'
 
   export default {
     data () {
@@ -33,10 +34,14 @@
         img_url: IMG_API, // 图片接口前缀
         flags: false,
         style: '',
-        position: {x: 0, y: 0},
+        position: { x: 0, y: 0 },
         dx: '',
         dy: ''
       }
+    },
+    async created () { // 每次打开小程序自动登录 防止JWT失效
+      await util.getUserInfo()
+      await api.GetSite()
     },
     async onShow () {
       util.showNavBarLoad()
@@ -92,7 +97,9 @@
           content: this.info[index].site,
           showCancel: false,
           confirmColor: '#338FFC',
-          success: res => { console.log(res) },
+          success: res => {
+            console.log(res)
+          },
           error: err => console.log(err)
         })
       }
@@ -106,10 +113,10 @@
     height 100%
     li[data-type="0"]
       transition: all .3s ease
-      transform: translate3d(0,0,0)
+      transform: translate3d(0, 0, 0)
     li[data-type="1"]
       transition: all .3s ease
-      transform: translate3d(-40%,0,0)
+      transform: translate3d(-40%, 0, 0)
     .info
       display flex
       align-items center
