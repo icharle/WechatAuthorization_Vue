@@ -1,26 +1,43 @@
-<<<<<<< HEAD
-# auth
+# 基于mpvue + Vuex + Promise + flyio『AuthenticatorX』小程序
 
-> 微信授权第三方平台
+> 基于微信小程序登录授权机制延伸第三方平台小程序
 
-## Build Setup
+## 小程序体验
+![小程序码](/docs/qrcode.jpg)
 
-``` bash
-# install dependencies
-npm install
+## 安装使用
 
-# serve with hot reload at localhost:8080
-npm run dev
+```bash
+# 从仓库中下载
+$ git clone https://github.com/icharle/WechatAuthorization_Vue.git
 
-# build for production with minification
-npm run build
+# 进入代码根目录安装依赖
+$ npm install
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# 修改utils文件夹中request.js接口地址
+$ APP_API = // 接口
+$ IMG_API = // 图片
+
+# 调试模式运行
+$ npm run dev
+
+# 打包发布
+$ npm run build
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-=======
-# WechatAuthorization__Vue
-基于微信小程序登录授权机制延伸第三方平台小程序
->>>>>>> 7133c0ef65390de240abf6fc13587549a4b00e26
+## 效果图
+  * 小程序主页
+  
+    ![小程序主页](/docs/index.png)
+    
+  * 模态框显示站点ID
+  
+    ![模态框显示站点ID](/docs/model.png)
+    
+  * 仿QQ左滑编辑、删除功能
+  
+    ![仿QQ左滑编辑、删除功能](/docs/left.png)
+    
+  * 添加站点功能
+  
+    ![添加站点功能](/docs/add.png)
